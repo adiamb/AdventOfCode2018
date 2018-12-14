@@ -25,19 +25,22 @@ def ProcessClaim(Claim):
 ### find the overlap by filling up a dictionary
 TrackDic ={}
 FileIn = sys.argv[1]
-OverlapClaims =[]
+Claims =[]
 with open(FileIn) as InPut:
 	for line in InPut:
 		if line:
 			Claim = line.strip()
+			ClaimID=Claim.split(' ')[0]
+			if ClaimID not in Claims:
+				Claims.append(ClaimID)
 			MarkCoords = ProcessClaim(Claim = Claim)
 			for key in MarkCoords:
 				if key in TrackDic:
 					#overlap += 1
 					get_claim = TrackDic.get(key)
-					TrackDic[key] = get_claim + '$' +Claim.split(' ')[0]
+					TrackDic[key] = get_claim + '$' +ClaimID
 				else:
-					TrackDic[key] = Claim.split(' ')[0]
+					TrackDic[key] = ClaimID
 
 ### count how many claims each coordinate takes up
 overlap = 0
@@ -45,3 +48,8 @@ for k, v in TrackDic.items():
 	if len(v.split('$')) > 1:
 		overlap += 1
 print 'Total sq inches that are overalapped are {} '.format(overlap)
+
+## Get nonoverlapping claims
+for claim in Claims:
+	if claim not in overlaplist:
+		print 'CLAIMS THAT DONT OVERLAP ARE {}'.format(claim)
