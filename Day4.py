@@ -31,3 +31,10 @@ key = itemgetter(1) # compare the value in the (key, value) pairs
 GMax = max(Guard.items(), key=key)[0]
 GMaxMinute = max(TimeTrack[GMax].items(), key=key)[0]
 print(GMax * GMaxMinute)
+## PART 2
+items =[]
+for GuardID in TimeTrack:
+	print GuardID
+	MaxMin, count=max(TimeTrack[GuardID].items(), key=key)
+	items.append((count, MaxMin*GuardID))
+print sorted(items, reverse=True)
