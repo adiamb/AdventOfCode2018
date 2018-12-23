@@ -29,5 +29,5 @@ for item in sorted(MasterTrack):
 ## PART 1
 key = itemgetter(1) # compare the value in the (key, value) pairs
 GMax = max(Guard.items(), key=key)[0]
-GMaxMin = max(TimeTrack[GMax].items(), key=key)[0]
-print(GMax * GMaxMin)
+GMaxMinute = max(TimeTrack[GMax].items(), key=key)[0]
+print(GMax * GMaxMinute)
